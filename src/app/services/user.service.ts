@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_API } from '../config/config';
-import { map } from "rxjs/operators";
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,12 @@ export class UserService {
 
   getUsers() {
     return this.http.get(`${URL_API}users?page=2`)
+      .pipe(
+        map(resp => resp['data']));
+  }
+
+  getUserByID(id: string) {
+    return this.http.get(`${URL_API}users/${id}`)
       .pipe(
         map(resp => resp['data']));
   }
